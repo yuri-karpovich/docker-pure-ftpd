@@ -1,38 +1,40 @@
+# FORK for testing purpose
+This Dockerfile is forked for testing purpose. Please use original Dockerfile by the link https://github.com/stilliard/docker-pure-ftpd
 
 Docker Pure-ftpd Server
 ============================
 
 Pull down with docker:
 ```bash
-docker pull stilliard/pure-ftpd:hardened
+docker pull spoonest/pure-ftpd:hardened
 ```
 
-**Often needing to run as `sudo`, e.g. `sudo docker pull stilliard/pure-ftpd`**
+**Often needing to run as `sudo`, e.g. `sudo docker pull spoonest/pure-ftpd`**
 
 ----------------------------------------
 
-**My advice is to extend this image to make any changes.**  
-This is because rebuilding the entire docker image via a fork can be slow as it rebuilds the entire pure-ftpd package from source. 
+**My advice is to extend this image to make any changes.**
+This is because rebuilding the entire docker image via a fork can be slow as it rebuilds the entire pure-ftpd package from source.
 
 Instead you can create a new project with a `DOCKERFILE` like so:
 
 ```
-FROM stilliard/pure-ftpd
+FROM spoonest/pure-ftpd
 
 # e.g. you could change the defult command run:
-CMD /usr/sbin/pure-ftpd -c 30 -C 5 -l puredb:/etc/pure-ftpd/pureftpd.pdb -E -j -R 
+CMD /usr/sbin/pure-ftpd -c 30 -C 5 -l puredb:/etc/pure-ftpd/pureftpd.pdb -E -j -R
 ```
 
 *Then you can build your own image, `docker build --rm -t my-pure-ftp .`, where my-pure-ftp is the name you want to build as*
 
 ----------------------------------------
 
-Starting it 
+Starting it
 ------------------------------
 
-`docker run -d --name ftpd_server -p 21:21 -p 30000-30009:30000-30009 -e "PUBLICHOST=localhost" stilliard/pure-ftpd:hardened`
+`docker run -d --name ftpd_server -p 21:21 -p 30000-30009:30000-30009 -e "PUBLICHOST=localhost" spoonest/pure-ftpd:hardened`
 
-*Or for your own image, replace stilliard/pure-ftpd with the name you built it with, e.g. my-pure-ftp*
+*Or for your own image, replace spoonest/pure-ftpd with the name you built it with, e.g. my-pure-ftp*
 
 Operating it
 ------------------------------
@@ -81,8 +83,8 @@ Tags available for different versions
 
 *Check the tags on github for available versions, feel free to submit issues and/or pull requests for newer versions*
 
-Usage of specific tags: 
-`sudo docker pull stilliard/pure-ftpd:hardened-1.0.36`
+Usage of specific tags:
+`sudo docker pull spoonest/pure-ftpd:hardened-1.0.36`
 
 ----------------------------------------
 
@@ -113,7 +115,7 @@ This is for PASV support, please see: [#5 PASV not fun :)](https://github.com/st
 Development (via git clone)
 ```bash
 # Clone the repo
-git clone https://github.com/stilliard/docker-pure-ftpd.git
+git clone https://github.com/spoonest/docker-pure-ftpd.git
 cd docker-pure-ftpd
 # Build the image
 make build
